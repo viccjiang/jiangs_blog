@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docus.dev)",
+      "Bash(npm view *)"
+    ]
+  }
+}

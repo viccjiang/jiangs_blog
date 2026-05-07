@@ -1,12 +1,16 @@
 export default defineNuxtConfig({
-  // https://github.com/nuxt-themes/docus
-  extends: ['@nuxt-themes/docus'],
+  extends: ['docus'],
 
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NODE_ENV !== 'production' },
+
+  llms: {
+    domain: 'https://jiangs-blog.vercel.app',
+    title: 'JIANG Blog',
+    description: '前端轉職'
+  },
 
   modules: [
-    // Remove it if you don't use Plausible analytics
-    // https://github.com/nuxt-modules/plausible
+    '@nuxt/eslint',
     '@nuxtjs/plausible'
   ],
 

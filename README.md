@@ -1,57 +1,55 @@
-# Docus Starter
+# JIANG Blog
 
-Starter template for [Docus](https://docus.dev).
+使用 [Docus](https://docus.dev)(Nuxt 4)建置的個人部落格 / 文件網站。
 
-## Clone
+## 專案結構
 
-Clone the repository (using `nuxi`):
+- `content/` — Markdown 內容,採路由式結構(例如 `content/introduction/getting-started.md` 對應 `/introduction/getting-started`)
+- `content/_dir.yml` — 章節導覽與中繼資料
+- `app.config.ts` — Docus 主題設定(標題、header、socials、github 等)
+- `nuxt.config.ts` — Nuxt 設定
+- `public/` — 靜態資源
 
-```bash
-npx nuxi init -t themes/docus
-```
-
-## Setup
-
-Install dependencies:
+## 開發
 
 ```bash
-yarn install
+npm install
+npm run dev
 ```
 
-## Development
+預設於 <http://localhost:3000> 啟動。
+
+## 建置與部署
 
 ```bash
-yarn dev
+npm run build      # SSR 建置
+npm run generate   # 產生靜態網站到 .output/public
+npm run preview    # 本機預覽建置結果
+npm run lint       # ESLint
 ```
 
-## Edge Side Rendering
+部署方式請參考 [Nuxt 部署文件](https://nuxt.com/docs/getting-started/deployment)。
 
-Can be deployed to Vercel Functions, Netlify Functions, AWS, and most Node-compatible environments.
+## 撰寫內容須知
 
-Look at all the available presets [here](https://v3.nuxtjs.org/guide/deploy/presets).
+- 頁面標題與描述寫在 frontmatter 的 `title` / `description`,不要再在內文寫 H1,否則 Docus 5 會重複渲染。
 
-```bash
-yarn build
-```
+  ```md
+  ---
+  title: Getting Started
+  description: 從撰寫 Markdown 到部署文件網站,只要幾分鐘。
+  ---
 
-## Static Generation
+  ## 子標題從這裡開始
+  ```
 
-Use the `generate` command to build your application.
+- 新章節:先建 `_dir.yml` 再加 Markdown。
+- 檔名與資料夾用小寫加連字號(`getting-started.md`、`introduction/`)。
 
-The HTML files will be generated in the .output/public directory and ready to be deployed to any static compatible hosting.
+## Docus 5 設定要點
 
-```bash
-yarn generate
-```
-
-## Preview build
-
-You might want to preview the result of your build locally, to do so, run the following command:
-
-```bash
-yarn preview
-```
+`app.config.ts` 中 `header` / `seo` / `socials` / `github` 放在**頂層**,不要包在 `docus: {}` 內。`github` 欄位是 `owner` / `name` / `branch` / `rootDir`。schema 參考 `node_modules/docus/app/types/index.d.ts`。
 
 ---
 
-For a detailed explanation of how things work, check out [Docus](https://docus.dev).
+更多細節請參考 [Docus](https://docus.dev) 官方文件。
